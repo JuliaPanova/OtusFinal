@@ -1,0 +1,10 @@
+{% extends 'my_class_app/base.html' %}
+
+{% block body %}
+  <h2>Student login</h2>
+  <form method="post" action="?next=../student_home">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign In</button>
+  </form>
+{% endblock %}

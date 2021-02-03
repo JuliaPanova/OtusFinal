@@ -1,0 +1,18 @@
+{% extends 'my_class_app/base.html' %}
+
+{% block body %}
+
+<h2>Teacher {{ teacher.name }}</h2>
+
+    <p>Name:<br>
+    {{ teacher.name }}
+    </p>
+    <p>Degree:<br>
+    {{ teacher.degree }}
+    </p>
+    <p>Rate per hour:<br>
+    {{ teacher.rate }}
+    </p>
+
+    <a class="btn btn-outline-secondary" href="../../teachers" role="button">All Teachers</a>
+{% endblock %}

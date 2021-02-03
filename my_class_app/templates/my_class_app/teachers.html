@@ -1,0 +1,17 @@
+{% extends 'my_class_app/base.html' %}
+
+{% block body %}
+
+<h2>Our teachers</h2>
+
+    <ul class="list-group">
+{% for teacher in object_list %}
+
+<li class="list-group-item">
+    <a href="../teacher/{{ teacher.id }}/">{{ teacher.name }},&nbsp;{{ teacher.degree }}</a>
+</li>
+
+
+{% endfor %}
+        </ul>
+{% endblock %}

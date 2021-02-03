@@ -1,0 +1,5 @@
+.idea/
+my_class_app/__pycache__/
+my_class_app/migrations/__pycache__/
+my_class_dj/__pycache__/
+venv/

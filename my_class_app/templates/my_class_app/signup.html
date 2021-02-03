@@ -1,0 +1,15 @@
+{% extends 'my_class_app/base.html' %}
+
+{% block body %}
+  <h2>New student registration</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    Name:<br>
+    <input type="text" name="name">
+    Phone:<br>
+    <input type="text" name="phone">
+    <button type="submit">Sign up</button>
+  </form>
+
+{% endblock %}

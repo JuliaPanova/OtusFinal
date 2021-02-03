@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+
+
+
+</head>
+<body>
+    <h1>Welcome, {{student.name}}!</h1>
+
+    <h2>Book a lesson</h2>
+<form action="/book/" method="POST">
+    {% csrf_token %}
+    <p class="error">{{ error }}</p>
+    <p>Date:<br>
+                  <div class="row">
+            <div class='col-sm-2'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' name="date" autocomplete="off" class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(function () {
+                    $('#datetimepicker1').datetimepicker({format: 'MM/DD/YYYY'});
+                });
+            </script>
+          </div>
+
+
+
+    </p>
+    <input type="hidden" name="student_id" value="{{student.id}}">
+    <p>Teacher:<br>
+        <select name="teacher_id">
+       {% for teacher in teachers %}
+        <option value="{{teacher.id}}">
+            {{ teacher.name }}
+        </option>
+        {% endfor %}
+        </select>
+    </p>
+    <p>
+        <input type="submit" value="Book">
+    </p>
+</form>
+
+    <h2>My messages</h2>
+    <ul class="list-group">
+        {% for message in messages %}
+        <li class="list-group-item {% if not message.is_read %}  font-weight-bold {% endif %}">
+            {{ message.sender_name }} <a class="text-decoration-none" href="/message?id={{message.id}}&r=s">{{message.title}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>My lessons</h2>
+    <ul class="list-group">
+        {% for lesson in lessons %}
+        <li class="list-group-item">
+            {{ lesson.date_time|date:"m/d/Y" }} <a class="text-decoration-none" href="/teacher/{{lesson.teacher.id}}">{{lesson.teacher.name}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

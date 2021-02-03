@@ -1,0 +1,37 @@
+{% extends 'my_class_app/base.html' %}
+
+{% block body %}
+
+<h2>Welcome, {{ teacher.name }}!</h2>
+
+    <p>Name:<br>
+    {{ teacher.name }}
+    </p>
+    <p>Degree:<br>
+    {{ teacher.degree }}
+    </p>
+    <p>Rate per hour:<br>
+    {{ teacher.rate }}
+    </p>
+
+
+    <h2>My messages</h2>
+    <ul class="list-group">
+        {% for message in messages %}
+        <li class="list-group-item {% if not message.is_read %}  font-weight-bold {% endif %}">
+            {{ message.sender_name }} <a class="text-decoration-none" href="/message?id={{message.id}}&r=t">{{message.title}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+<h2>My lessons</h2>
+    <ul class="list-group">
+        {% for lesson in lessons %}
+        <li class="list-group-item">
+            {{ lesson.date_time|date:"m/d/Y" }} <a class="text-decoration-none" href="/student/{{lesson.student.id}}">{{lesson.student.name}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
